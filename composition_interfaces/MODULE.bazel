@@ -1,3 +1,4 @@
+
 # Copyright 2025 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,24 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Imports
+# Package information
+        
+module(
+    name = "composition_interfaces",
+    version = "2.4.1",
+    compatibility_level = 1,
+)
 
-load("@ros//:defs.bzl", "ros_interface")
+# Dependencies
 
-package(default_visibility = ["//visibility:public"])
+bazel_dep(name = "ros", version = "0.0.0")
 
-[
-    ros_interface(
-        name = srv,
-        src = "@test_interface_files//srv:{}.srv".format(srv),
-        deps = [
-            # Services have implicit deps
-            "@service_msgs//msg:ServiceEventInfo",
-        ],
-        )
-    for srv in [
-        "Arrays",
-        "BasicTypes",
-        "Empty",
-    ]
-]
+bazel_dep(name = "rcl_interfaces", version = "2.4.1")
+bazel_dep(name = "service_msgs", version = "2.4.1")

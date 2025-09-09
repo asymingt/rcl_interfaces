@@ -1,3 +1,4 @@
+
 # Copyright 2025 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,19 +13,45 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Imports
-
 load("@ros//:defs.bzl", "ros_interface")
 
 package(default_visibility = ["//visibility:public"])
 
-# Interfaces
+ros_interface(
+    name = "ChangeState",
+    src = "ChangeState.srv",
+    deps = [
+        "//msg:Transition",
+        # Services have implicit deps
+        "@service_msgs//msg:ServiceEventInfo",
+    ],
+)
 
 ros_interface(
-    name = "CancelGoal",
-    src = "CancelGoal.srv",
+    name = "GetAvailableStates",
+    src = "GetAvailableStates.srv",
     deps = [
-        "//msg:GoalInfo",
+        "//msg:State",
+        # Services have implicit deps
+        "@service_msgs//msg:ServiceEventInfo",
+    ],
+)
+
+ros_interface(
+    name = "GetAvailableTransitions",
+    src = "GetAvailableTransitions.srv",
+    deps = [
+        "//msg:TransitionDescription",
+        # Services have implicit deps
+        "@service_msgs//msg:ServiceEventInfo",
+    ],
+)
+
+ros_interface(
+    name = "GetState",
+    src = "GetState.srv",
+    deps = [
+        "//msg:State",
         # Services have implicit deps
         "@service_msgs//msg:ServiceEventInfo",
     ],

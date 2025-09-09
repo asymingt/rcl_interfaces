@@ -12,24 +12,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Imports
-
 load("@ros//:defs.bzl", "ros_interface")
 
 package(default_visibility = ["//visibility:public"])
 
-[
-    ros_interface(
-        name = srv,
-        src = "@test_interface_files//srv:{}.srv".format(srv),
-        deps = [
-            # Services have implicit deps
-            "@service_msgs//msg:ServiceEventInfo",
-        ],
-        )
-    for srv in [
-        "Arrays",
-        "BasicTypes",
-        "Empty",
+ros_interface(
+    name = "ListNodes",
+    src = "ListNodes.srv",
+    deps = [
+        # Services have implicit deps
+        "@service_msgs//msg:ServiceEventInfo",
     ]
-]
+)
+
+ros_interface(
+    name = "LoadNode",
+    src = "LoadNode.srv",
+    deps = [
+        "@rcl_interfaces//msg:Parameter",
+        # Services have implicit deps
+        "@service_msgs//msg:ServiceEventInfo",
+    ],
+)
+
+ros_interface(
+    name = "UnloadNode",
+    src = "UnloadNode.srv",
+    deps = [
+        # Services have implicit deps
+        "@service_msgs//msg:ServiceEventInfo",
+    ]
+)

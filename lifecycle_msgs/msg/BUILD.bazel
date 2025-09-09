@@ -12,24 +12,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Imports
-
 load("@ros//:defs.bzl", "ros_interface")
 
 package(default_visibility = ["//visibility:public"])
 
-[
-    ros_interface(
-        name = srv,
-        src = "@test_interface_files//srv:{}.srv".format(srv),
-        deps = [
-            # Services have implicit deps
-            "@service_msgs//msg:ServiceEventInfo",
-        ],
-        )
-    for srv in [
-        "Arrays",
-        "BasicTypes",
-        "Empty",
-    ]
-]
+ros_interface(
+    name = "State",
+    src = "State.msg",
+)
+
+ros_interface(
+    name = "Transition",
+    src = "Transition.msg",
+)
+
+ros_interface(
+    name = "TransitionDescription",
+    src = "TransitionDescription.msg",
+    deps = [
+        ":State",
+        ":Transition",
+    ],
+)
+
+ros_interface(
+    name = "TransitionEvent",
+    src = "TransitionEvent.msg",
+    deps = [
+        ":State",
+        ":Transition",
+    ],
+)
