@@ -1,4 +1,3 @@
-
 # Copyright 2025 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,54 +14,47 @@
 
 # Imports
 
-load("@ros//:defs.bzl", "ros_interface", "ros_package")
+load("@ros//:defs.bzl", "ros_interface")
 
 package(default_visibility = ["//visibility:public"])
 
 # Interfaces
 
 ros_interface(
-    name = "srv__CancelGoal",
-    src = "srv/CancelGoal.srv",
+    name = "Field",
+    src = "Field.msg",
     deps = [
-        "@service_msgs//:msg__ServiceEventInfo",
-        ":msg__GoalInfo",
+        ":FieldType",
     ],
 )
 
 ros_interface(
-    name = "msg__GoalInfo",
-    src = "msg/GoalInfo.msg",
+    name = "FieldType",
+    src = "FieldType.msg",
+)
+
+ros_interface(
+    name = "IndividualTypeDescription",
+    src = "IndividualTypeDescription.msg",
     deps = [
-        "@builtin_interfaces//:msg__Time",
-        "@unique_identifier_msgs//:msg__UUID",
+        ":Field",
     ],
 )
 
 ros_interface(
-    name = "msg__GoalStatus",
-    src = "msg/GoalStatus.msg",
+    name = "KeyValue",
+    src = "KeyValue.msg",
+)
+
+ros_interface(
+    name = "TypeDescription",
+    src = "TypeDescription.msg",
     deps = [
-        ":msg__GoalInfo",
+        ":IndividualTypeDescription",
     ],
 )
 
 ros_interface(
-    name = "msg__GoalStatusArray",
-    src = "msg/GoalStatusArray.msg",
-    deps = [
-        ":msg__GoalStatus",
-    ],
-)
-
-# Package
-
-ros_package(
-    name = "action_msgs",
-    interfaces = [
-        ":msg__GoalInfo",
-        ":msg__GoalStatus",
-        ":msg__GoalStatusArray",
-        ":srv__CancelGoal",
-    ],
+    name = "TypeSource",
+    src = "TypeSource.msg",
 )

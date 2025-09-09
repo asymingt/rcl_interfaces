@@ -1,4 +1,3 @@
-
 # Copyright 2025 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,28 +14,28 @@
 
 # Imports
 
-load("@ros//:defs.bzl", "ros_interface", "ros_package")
+load("@ros//:defs.bzl", "ros_interface")
 
 package(default_visibility = ["//visibility:public"])
 
 # Interfaces
 
 ros_interface(
-    name = "msg__Duration",
-    src = "msg/Duration.msg",
+    name = "MetricsMessage",
+    src = "MetricsMessage.msg",
+    deps = [
+        ":StatisticDataPoint",
+        "@builtin_interfaces//msg:Time",
+    ],
 )
 
 ros_interface(
-    name = "msg__Time",
-    src = "msg/Time.msg",
+    name = "StatisticDataPoint",
+    src = "StatisticDataPoint.msg",
 )
 
-# Package
-
-ros_package(
-    name = "builtin_interfaces",
-    interfaces = [
-        ":msg__Duration",
-        ":msg__Time",
-    ],
+ros_interface(
+    name = "StatisticDataType",
+    src = "StatisticDataType.msg",
 )
+

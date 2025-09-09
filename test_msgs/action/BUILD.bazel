@@ -1,4 +1,3 @@
-
 # Copyright 2025 Open Source Robotics Foundation, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,12 +18,32 @@ load("@ros//:defs.bzl", "ros_interface")
 
 package(default_visibility = ["//visibility:public"])
 
-# Interfaces
+[
+    ros_interface(
+        name = action,
+        src = "@test_interface_files//action:{}.action".format(action),
+        deps = [
+            "@action_msgs//msg:GoalInfo",
+            "@action_msgs//msg:GoalStatus",
+            "@action_msgs//msg:GoalStatusArray",
+            "@action_msgs//srv:CancelGoal",
+        ],
+        )
+    for action in [
+        "Fibonacci",
+    ]
+]
 
 ros_interface(
-    name = "msg__Clock",
-    src = "msg/Clock.msg",
+    name = "NestedMessage",
+    src = "NestedMessage.action",
     deps = [
-        "@builtin_interfaces//:msg__Time",
+        "@action_msgs//msg:GoalInfo",
+        "@action_msgs//msg:GoalStatus",
+        "@action_msgs//msg:GoalStatusArray",
+        "@action_msgs//srv:CancelGoal",
+        "@builtin_interfaces//:msg:Time",
+        "//msg:BasicTypes",
+        "//msg:Builtins",
     ],
 )
