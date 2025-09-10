@@ -21,7 +21,7 @@ package(default_visibility = ["//visibility:public"])
 c_ros_library(
     name = "test_action_typesupport_c_builds_msgs",
     deps = [
-        "@test_msgs//action:Fibonacci"
+        "//action:Fibonacci"
     ],
 )
 
@@ -38,7 +38,7 @@ cc_test(
 cc_ros_library(
     name = "test_action_typesupport_cpp_builds_msgs",
     deps = [
-        "@test_msgs//action:Fibonacci"
+        "//action:Fibonacci"
     ],
 )
 

@@ -24,23 +24,53 @@ package(default_visibility = ["//visibility:public"])
         src = "@test_interface_files//msg:{}.msg".format(msg),
     )
     for msg in [
-        "Arrays",
         "BasicTypes",
-        "BoundedPlainSequences",
-        "BoundedSequences",
         "Constants",
         "Defaults",
         "Empty",
-        "MultiNested",
-        "Nested",
         "Strings",
-        "UnboundedSequences",
         "WStrings",
     ]
 ]
 
+[
+    ros_interface(
+        name = msg,
+        src = "@test_interface_files//msg:{}.msg".format(msg),
+        deps = [
+            ":BasicTypes",
+            ":Constants",
+            ":Defaults",
+        ],
+    )
+    for msg in [
+        "Arrays",
+        "BoundedPlainSequences",
+        "BoundedSequences",
+        "UnboundedSequences",
+    ]
+]
+
 ros_interface(
-    name = "msg__Builtins",
+    name = "Nested",
+    src = "@test_interface_files//msg:Nested.msg",
+    deps = [
+        ":BasicTypes",
+    ],
+)
+
+ros_interface(
+    name = "MultiNested",
+    src = "@test_interface_files//msg:MultiNested.msg",
+    deps = [
+        ":Arrays",
+        ":BoundedSequences",
+        ":UnboundedSequences",
+    ],
+)
+
+ros_interface(
+    name = "Builtins",
     src = "Builtins.msg",
     deps = [
         "@builtin_interfaces//msg:Duration",
